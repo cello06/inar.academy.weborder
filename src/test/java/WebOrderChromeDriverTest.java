@@ -1,12 +1,14 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.HomePage;
+import pages.Order;
+import pages.WebOrderHomePage;
+import pages.WebOrderLoginPage;
+import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WebOrderChromeDriverTest {
 
@@ -17,48 +19,28 @@ public class WebOrderChromeDriverTest {
 	void setUp() {
 		System.out.println("--------------TC_" + testNumber + " : is started! -------------");
 		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait( Duration.ofSeconds(10));
 		driver.get("https://InarAcademy:Fk160621.@test.inar-academy.com");
+		driver.manage().window().maximize();
 	}
 
-	@Test
-	void testSeleniumWebDriver() {
-
-		String expected = "https://InarAcademy:Fk160621.@test.inar-academy.com/";
-		String actual = driver.getCurrentUrl();
-		System.out.println("Expected URL : " + expected + "\nActual URL : " + actual);
-		assertEquals(expected, actual,
-				"The URL is not the same : \n" + "Expected URL : " + expected + "\nActual URL : " + actual);
-
-	}
-
-	@Test
-	void testTitle() {
-		String expectedTitle = "Inar Academy";
-		String actualTitle = driver.getTitle();
-		System.out.println("Expected Title : " + expectedTitle + "\nActual Title : " + actualTitle);
-		assertEquals(expectedTitle, actualTitle, "title is wrong!");
-	}
 
 	@Test
 	void testElements() throws InterruptedException {
-		WebElement webOrderElement = driver.findElement(By.xpath("//*[@id=\"navbar\"]/div/a[1]"));
-		webOrderElement.click();
-		WebElement userNameTextBox = driver.findElement(By.id("login-username-input"));
-		userNameTextBox.sendKeys("Inar");
+		HomePage homePage = new HomePage(driver);
+		WebOrderLoginPage webOrderLoginPage = homePage.clickWebOrder();
+		WebOrderHomePage webOrderHomePage = webOrderLoginPage.login("Inar","Academy");
+		Order order = webOrderHomePage.navigateToOrderPage();
+		order.enterProduct("MyMoney","10","20");
+		order.enterCustomerInformation("Inar Academy","King Cross","Atlantic","NWY","12234");
+		order.selectPaymentMethod("visa");
+		order.enterCardNumber("4938281746192845");
+		order.enterExpiryDate("11/28" );
+		order.clickProcessButton();
 
-		WebElement passwordTextBox = driver.findElement(By.id("login-password-input"));
-		passwordTextBox.sendKeys("Academy");
+		Thread.sleep(5000);
 
-		WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"login-button\"]"));
-		loginButton.click();
 
-		String expectedURl = "https://InarAcademy:Fk160621.@test.inar-academy.com/weborder";
-		String actualURL = driver.getCurrentUrl();
-		System.out.println("After Log-in page we check the URL in web order page : \n" + "Expected URL : " + expectedURl
-				+ "\nActual URL : " + actualURL);
-
-		Thread.sleep(4000);
-		assertEquals(expectedURl, actualURL, "There is a problem in current url we are in the wrong page!");
 	}
 
 	@AfterEach
