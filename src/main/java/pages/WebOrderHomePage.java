@@ -2,27 +2,34 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class WebOrderHomePage {
-    private WebDriver driver;
+public class WebOrderHomePage extends BasePage {
 
-    private By viewAllOrderElement = By.xpath("//a[@href='/weborder/view-orders']");
-    private By viewAllProductElement = By.xpath("//a[@href='/weborder/view-products']");
-    private By orderElement = By.xpath("//a[@href='/weborder/order']");
+	@FindBy(xpath = "//a[@href='/weborder/view-orders']")
+	private WebElement viewAllOrderElement;
 
-    public WebOrderHomePage(WebDriver driver){
-        this.driver = driver;
-    }
-    public ViewAllOrder navigateToViewAllOrder(){
-        driver.findElement(viewAllOrderElement).click();
-        return new ViewAllOrder(driver);
-    }
-    public ViewAllProducts navigateToViewAllProducts(){
-        driver.findElement(viewAllProductElement).click();
-        return new ViewAllProducts(driver);
-    }
-    public Order navigateToOrderPage(){
-        driver.findElement(orderElement).click();
-        return new Order(driver);
-    }
+	@FindBy(xpath = "//a[@href='/weborder/view-products']")
+	private WebElement viewAllProductElement;
+
+	@FindBy(xpath = "//a[@href='/weborder/order']")
+	private WebElement orderElement;
+
+	public WebOrderHomePage() {
+		super();
+	}
+
+	public void navigateToViewAllOrder() {
+		viewAllOrderElement.click();
+	}
+
+	public void navigateToViewAllProducts() {
+		viewAllProductElement.click();
+	}
+
+	public void navigateToOrderPage() {
+		orderElement.click();
+	}
+
 }

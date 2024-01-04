@@ -2,34 +2,40 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class WebOrderLoginPage {
-    private WebDriver driver;
+public class WebOrderLoginPage extends BasePage {
 
-    private By usernameInputField = By.id("login-username-input");
-    private By passwordInputField = By.id("login-password-input");
-    private By loginButton = By.id("login-button");
+	@FindBy(id = "login-username-input")
+	private WebElement usernameInputField;
 
-    public WebOrderLoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
+	@FindBy(id = "login-password-input")
+	private WebElement passwordInputField;
 
-    public void enterUsername(String username) {
-        driver.findElement(usernameInputField).sendKeys(username);
-    }
+	@FindBy(id = "login-button")
+	private WebElement loginButton;
 
-    public void enterPassword(String password) {
-        driver.findElement(passwordInputField).sendKeys(password);
-    }
+	public WebOrderLoginPage() {
+		super();
+	}
 
-    public void clickLoginButton() {
-        driver.findElement(loginButton).click();
-    }
+	public void enterUsername(String username) {
+		usernameInputField.sendKeys(username);
+	}
 
-    public WebOrderHomePage login(String username, String password) {
-        enterUsername(username);
-        enterPassword(password);
-        clickLoginButton();
-        return new WebOrderHomePage(driver);
-    }
+	public void enterPassword(String password) {
+		passwordInputField.sendKeys(password);
+	}
+
+	public void clickLoginButton() {
+		loginButton.click();
+	}
+
+	public void login(String username, String password) {
+		enterUsername(username);
+		enterPassword(password);
+		clickLoginButton();
+	}
+
 }
