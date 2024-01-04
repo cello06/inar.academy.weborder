@@ -1,13 +1,15 @@
-   #CHANGE LOG
-
-   ##[1.0.1]
+   #CHANGE LOG 
+   
+   ##[1.0.2]
 
    ###Changed
+   
+   -Enhancement Synchronized Driver Class for Enhanced WebDriver Management in Multi-threaded Testing Environments   
 
+   -Enhancement-of-POM-with.Page.Factory.Integration
+   
    -Implement Page Object Model in UI Framework
-
-   -[Enhancement-of-POM-with.Page.Factory.Integration]("https://github.com/cello06/inar.academy.weborder/tree/master");
-
+ 
    [groupId]:org.inar
 
    [artifactId]:inar.web
