@@ -1,13 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class Order extends BasePage {
+public class OrderPage extends BasePage {
 
 	// Order Page
 	// Product Information
@@ -61,7 +58,10 @@ public class Order extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Process')]")
 	private WebElement processButton;
 
-	public Order() {
+	@FindBy(xpath = "//div[@role='alert']")
+	private WebElement processMessage;
+
+	public OrderPage() {
 		super();
 	}
 
@@ -160,6 +160,9 @@ public class Order extends BasePage {
 
 	public void clickProcessButton() {
 		processButton.click();
+	}
+	public String getProcessSuccessMessage(){
+		return processMessage.getText();
 	}
 
 }

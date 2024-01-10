@@ -4,6 +4,8 @@
 
    ###Changed
    
+   -Implement Testng Framework
+   
    -Enhancement Synchronized Driver Class for Enhanced WebDriver Management in Multi-threaded Testing Environments   
 
    -Enhancement-of-POM-with.Page.Factory.Integration

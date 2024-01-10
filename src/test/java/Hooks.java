@@ -1,15 +1,16 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.testng.annotations.*;
 import utils.Driver;
+import utils.PagesInstances;
 
 public class Hooks {
-
-	@BeforeAll
-	public static void setUpTestEnvironment() {
-		Driver.getDriver();
+	PagesInstances pagesInstances = new PagesInstances();
+	@Parameters("browser")
+	@BeforeClass
+	public static void setUpTestEnvironment(String browser) {
+		Driver.setDriver(browser);
 	}
 
-	@AfterAll
+	@AfterClass
 	public static void tearDown() {
 		Driver.closeDriver();
 	}
