@@ -1,0 +1,9 @@
+<suite name="smoke">
+    <test name="WebOrder with chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="WebOrderTest"/>
+
+        </classes>
+    </test>
+</suite>
